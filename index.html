@@ -3,13 +3,19 @@
         <title>Chat demo</title>
     </head>
     <body>
-        <div class="container">
-            <div class="chat-area">
-                Empty for now
-            </div>
-            <div class="chat-message">
-                <input type="text" />
-            </div>
+        <div class="app">
+            <p>{{ message }}</p>
+            <input v-model="message" placeholder="Skriv något..">
         </div>
+        
+        <script src="http://cdn.jsdelivr.net/vue/1.0.20/vue.min.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: ''
+                }
+            });
+        </script>
     </body>
 </html>
