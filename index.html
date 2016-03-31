@@ -1,31 +1,96 @@
-<html>
+<html class="pixel-ratio-2 retina watch-active-state"><head>
     <meta charset="utf-8">
-    <head>
-        <title>Chat demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Chat demo</title>
+    <link rel="stylesheet" href="http://framework7.io/dist/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="http://framework7.io/dist/css/framework7.ios.colors.min.css">
     </head>
     <body>
-        <div id="app">
-            <div v-for="message in messages">
-                <p v-text="message"></p>
+        <div class="views">
+            <div class="view view-main" data-page="home">
+                <div class="pages">
+                    <div data-page="home" class="page navbar-fixed toolbar-fixed">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="left"> </div>
+                                <div class="center">Chatten</div>
+                                <div class="right"> </div>
+                            </div>
+                        </div>
+                        <div class="toolbar messagebar">
+                            <div class="toolbar-inner">
+                                <textarea placeholder="Message"></textarea><a href="#" class="link">Send</a>
+                            </div>
+                        </div>
+                        <div class="page-content messages-content">
+                            <div class="messages messages-auto-layout">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input v-model="message" @keyup.13="send" placeholder="Skriv något..">
         </div>
+    <script type="text/javascript" src="http://framework7.io/dist/js/framework7.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script>
+        var socket = io('http://brief-dev.azurewebsites.net');
+        var myName = 'Masse';
+        var myApp = new Framework7();
+        var $$ = Dom7;
+        var conversationStarted = false;
         
-        <script src="http://cdn.jsdelivr.net/vue/1.0.20/vue.min.js"></script>
-        <script>
-            new Vue({
-                el: '#app',
-                data: {
-                    message: '',
-                    messages: []
-                },
-                methods: {
-                    send: function() {
-                        this.messages.push(this.message);
-                        this.message = '';
-                    }
-                }
+        var myMessages = myApp.messages('.messages', { autoLayout:true });
+        var myMessagebar = myApp.messagebar('.messagebar');
+        
+        $$('.messagebar textarea').on('keypress', enter);   
+        $$('.messagebar .link').on('click', send);
+        
+        getMessages();
+        
+        function getMessages() {
+            socket.on('subscribe-roommessage-list', function (data) {
+                recieve(data);
             });
+        }
+        
+        function enter(e) {
+            if (e.keyCode !== 13)
+                return;
+            e.preventDefault();
+            send();
+        }
+        
+        function send() {
+            var messageText = myMessagebar.value().trim();
+            if (messageText.length === 0) return;
+            socket.send('post-roommessage-create', { text: messageText, fullName: myName });
+            myMessagebar.clear()
+        }
+        
+        function recieve(message) {
+            var avatar, 
+                name, 
+                messageType = 'sent';
+                
+            if(message.fullName !== myName) {
+                avatar = 'http://lorempixel.com/200/200/people/9';
+                name = message.fullName;
+                messageType = 'received';
+            }
+            
+            myMessages.addMessage({
+                text: message.text,
+                type: messageType,
+                avatar: avatar,
+                name: name,
+                day: !conversationStarted ? 'Idag' : false,
+                time: !conversationStarted ? (new Date()).getHours() + ':' + (new Date()).getMinutes() : false
+            });
+            
+            conversationStarted = true;
+        }
         </script>
     </body>
 </html>
