@@ -1,10 +1,11 @@
 <html>
+    <meta charset="utf-8">
     <head>
         <title>Chat demo</title>
     </head>
     <body>
         <div id="app">
-            <p>{{ message }}</p>
+            <p v-text="message"></p>
             <input v-model="message" placeholder="Skriv något..">
         </div>
         
