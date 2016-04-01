@@ -148,7 +148,7 @@
             var brickOffsetTop = 30;
             var brickOffsetLeft = 5;
             var score = 0;
-            var lives = 3;
+            var lives = 1;
             
             var bricks = [];
             for(c=0; c<brickColumnCount; c++) {
@@ -193,7 +193,6 @@
                                 b.status = 0;
                                 score++;
                                 if(score == brickRowCount*brickColumnCount) {
-                                    document.location.reload();
                                 }
                             }
                         }
@@ -265,7 +264,6 @@
                     else {
                         lives--;
                         if(!lives) {
-                            document.location.reload();
                         }
                         else {
                             x = canvas.width/2;
