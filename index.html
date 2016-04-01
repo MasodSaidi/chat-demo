@@ -242,27 +242,32 @@
                 ctx.fillText("Score: "+score, 8, 20);
             }
             function drawLives() {
+                if (stopped)
+                    return;
+                    
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#0095DD";
                 ctx.fillText("Lives: "+lives, canvas.width-65, 20);
             }
             
+            var latestStatus = null;
             function drawStatus(text) {
+                if (!latestStatus && !text)
+                    return;
+                latestStatus = text;
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#0095DD";
-                ctx.fillText(text, canvas.width-65, 20);
+                ctx.fillText(latestStatus, canvas.width-130, 150);
             }
             
             function draw() {
-                if (stopped)
-                    return;
-                
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawBricks();
                 drawBall();
                 drawPaddle();
                 drawScore();
                 drawLives();
+                drawStatus();
                 collisionDetection();
                 
                 if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
