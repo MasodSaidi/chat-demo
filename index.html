@@ -129,6 +129,8 @@
             var canvas = document.querySelector(canvasSelector);
             if (!canvas)
                 return;
+            canvas.classList.remove('game');
+            canvas.classList.add('game-initiated');
             var ctx = canvas.getContext("2d");
             var ballRadius = 10;
             var x = canvas.width/2;
