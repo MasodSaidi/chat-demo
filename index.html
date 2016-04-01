@@ -151,6 +151,7 @@
             var brickOffsetLeft = 5;
             var score = 0;
             var lives = 3;
+            var stopped = false;
             
             var bricks = [];
             for(c=0; c<brickColumnCount; c++) {
@@ -196,6 +197,7 @@
                                 score++;
                                 if(score == brickRowCount*brickColumnCount) {
                                     drawStatus('YOU WON!');
+                                    stop();
                                 }
                             }
                         }
@@ -252,6 +254,9 @@
             }
             
             function draw() {
+                if (stopped)
+                    return;
+                
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawBricks();
                 drawBall();
@@ -274,6 +279,7 @@
                         lives--;
                         if(!lives) {
                             drawStatus('GAME OVER');
+                            stop();
                         }
                         else {
                             x = canvas.width/2;
@@ -295,6 +301,10 @@
                 x += dx;
                 y += dy;
                 requestAnimationFrame(draw);
+            }
+            
+            function stop() {
+                stopped = true;
             }
             
             draw();
