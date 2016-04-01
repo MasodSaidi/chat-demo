@@ -4,8 +4,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Chat demo</title>
-    <link rel="stylesheet" href="http://framework7.io/dist/css/framework7.ios.min.css">
-    <link rel="stylesheet" href="http://framework7.io/dist/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="https://framework7.io/dist/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="https://framework7.io/dist/css/framework7.ios.colors.min.css">
     </head>
     <body>
         <div class="views">
@@ -32,20 +32,20 @@
                 </div>
             </div>
         </div>
-    <script type="text/javascript" src="http://framework7.io/dist/js/framework7.min.js"></script>
+    <script type="text/javascript" src="https://framework7.io/dist/js/framework7.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     <script>
         var $$ = Dom7;
         var myApp = new Framework7();
-        var socket = io('http://brief-dev.azurewebsites.net');
+        var socket = io('https://brief-dev.azurewebsites.net');
         var query = $$.parseUrlQuery(window.location.href);
         var myName = query.name || 'Anonym ' + getRandomNumber();
         var conversationStarted = false;
         var channels = [
-            { name: 'p1', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p1-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/132/2300295_176_132.jpg" />' },
-            { name: 'p2', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p2musik-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/163/2302861_176_132.jpg" />' },
-            { name: 'p3', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p3-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/164/2302858_176_132.jpg" />' },
-            { name: 'p4', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p4stockholm-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/223/2300322_176_132.jpg" />' },
+            { name: 'p1', html: '<audio preload="auto" autoplay src="https://http-live.sr.se/p1-mp3-192"></audio><img src="https://sverigesradio.se/sida/images/132/2300295_176_132.jpg" />' },
+            { name: 'p2', html: '<audio preload="auto" autoplay src="https://http-live.sr.se/p2musik-mp3-192"></audio><img src="https://sverigesradio.se/sida/images/163/2302861_176_132.jpg" />' },
+            { name: 'p3', html: '<audio preload="auto" autoplay src="https://http-live.sr.se/p3-mp3-192"></audio><img src="https://sverigesradio.se/sida/images/164/2302858_176_132.jpg" />' },
+            { name: 'p4', html: '<audio preload="auto" autoplay src="https://http-live.sr.se/p4stockholm-mp3-192"></audio><img src="https://sverigesradio.se/sida/images/223/2300322_176_132.jpg" />' },
         ];
         
         var myMessages = myApp.messages('.messages', { autoLayout:true });
@@ -99,7 +99,7 @@
                 messageType = 'sent';
                 
             if(message.fullName !== myName) {
-                avatar = 'http://lorempixel.com/58/58/people/9';
+                avatar = 'https://lorempixel.com/58/58/people/9';
                 name = message.fullName;
                 messageType = 'received';
             }
