@@ -78,7 +78,7 @@
             if (messageText.length === 0) return;
             
             var channelToPlay = channels.filter(function(channel) {
-                return channel.name === messageText;
+                return channel.name === messageText.toLowerCase();
             });
             if (channelToPlay.length > 0)
                 messageText = channelToPlay[0].html;
