@@ -41,6 +41,12 @@
         var query = $$.parseUrlQuery(window.location.href);
         var myName = query.name || 'Anonym ' + getRandomNumber();
         var conversationStarted = false;
+        var channels = [
+            { name: 'p1', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p1-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/132/2300295_176_132.jpg" />' },
+            { name: 'p2', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p2musik-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/163/2302861_176_132.jpg" />' },
+            { name: 'p3', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p3-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/164/2302858_176_132.jpg" />' },
+            { name: 'p4', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p4stockholm-mp3-192"></audio><img src="http://sverigesradio.se/sida/images/223/2300322_176_132.jpg" />' },
+        ];
         
         var myMessages = myApp.messages('.messages', { autoLayout:true });
         var myMessagebar = myApp.messagebar('.messagebar');
@@ -70,6 +76,13 @@
         function send() {
             var messageText = myMessagebar.value().trim();
             if (messageText.length === 0) return;
+            
+            var channelToPlay = channels.filter(function(channel) {
+                return channel.name === messageText;
+            });
+            if (channelToPlay.length > 1);
+                messageText = channelToPlay[0].html;
+            
             socket.emit('post-roommessage-create', { text: messageText, fullName: myName });                
             myMessagebar.clear();
             myMessagebar.textarea.focus();
