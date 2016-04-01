@@ -80,7 +80,7 @@
             var channelToPlay = channels.filter(function(channel) {
                 return channel.name === messageText;
             });
-            if (channelToPlay.length > 1);
+            if (channelToPlay.length > 0)
                 messageText = channelToPlay[0].html;
             
             socket.emit('post-roommessage-create', { text: messageText, fullName: myName });                
