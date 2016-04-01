@@ -85,7 +85,7 @@
                 messageText = channelToPlay[0].html;
                 
             if (messageText.toLowerCase() === 'spela')
-                messageText = '<canvas class="game" width="180" height="200"></canvas>';
+                messageText = '<canvas class="game" width="145" height="200"></canvas>';
             
             socket.emit('post-roommessage-create', { text: messageText, fullName: myName });                
             myMessagebar.clear();
@@ -136,7 +136,7 @@
             canvas.classList.remove('game');
             canvas.classList.add('game-initiated');
             var ctx = canvas.getContext("2d");
-            var ballRadius = 10;
+            var ballRadius = 5;
             var x = canvas.width/2;
             var y = canvas.height-30;
             var dx = 2;
@@ -148,7 +148,7 @@
             var leftPressed = false;
             var brickRowCount = 3;
             var brickColumnCount = 3;
-            var brickWidth = 50;
+            var brickWidth = 35;
             var brickHeight = 20;
             var brickPadding = 10;
             var brickOffsetTop = 30;
@@ -261,7 +261,7 @@
                     return;
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#FE5B00";
-                ctx.fillText(latestStatus, canvas.width-135, 150);
+                ctx.fillText(latestStatus, canvas.width-115, 150);
             }
             
             function draw() {
