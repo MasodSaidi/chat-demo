@@ -252,9 +252,9 @@
             
             var latestStatus = null;
             function drawStatus(text) {
-                if (!latestStatus && !text)
+                latestStatus = latestStatus ? latestStatus : text;
+                if (!latestStatus)
                     return;
-                latestStatus = text;
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#0095DD";
                 ctx.fillText(latestStatus, canvas.width-130, 150);
