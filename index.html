@@ -39,7 +39,7 @@
         var myApp = new Framework7();
         var socket = io('http://brief-dev.azurewebsites.net');
         var query = $$.parseUrlQuery(window.location.href);
-        var myName = query.name || 'Anonym';
+        var myName = query.name || 'Anonym ' + randomNumber();
         var conversationStarted = false;
         
         var myMessages = myApp.messages('.messages', { autoLayout:true });
@@ -101,6 +101,20 @@
             });
             
             conversationStarted = true;
+        }
+        
+        var usedRandomNumbers = [];
+        function randomNumber() {
+            var unique;
+            var number;
+
+            do {
+                number = (Math.floor(Math.random() * 9999) + 1);
+                unique = usedRandomNumbers.indexOf(number === -1);
+            } while (!unique);
+            usedRandomNumbers.push(number);
+
+            return number;
         }
         </script>
     </body>
