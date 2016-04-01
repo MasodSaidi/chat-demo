@@ -39,7 +39,8 @@
         var myApp = new Framework7();
         var socket = io('https://brief-dev.azurewebsites.net');
         var query = $$.parseUrlQuery(window.location.href);
-        var myName = query.name || 'Anonym ' + getRandomNumber();
+        var myName = query.name || getName();
+        localStorage.setItem('name', myName);
         var conversationStarted = false;
         var channels = [
             { name: 'p1', html: '<audio preload="auto" autoplay src="http://http-live.sr.se/p1-mp3-192"></audio><img src="https://sverigesradio.se/sida/images/132/2300295_176_132.jpg" />' },
@@ -121,8 +122,11 @@
             initGame();
         }
         
-        function getRandomNumber() {
-            return (Math.floor(Math.random() * 9999) + 1);
+        function getName() {
+            var name = localStorage.getItem('name');
+            if (name)
+                return name;
+            return 'Anonym ' + (Math.floor(Math.random() * 9999) + 1);
         }
         
         function initGame() {
