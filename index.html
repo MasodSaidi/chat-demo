@@ -62,8 +62,8 @@
         getMessages();
         
         function getMessages() {
-            socket.on('subscribe-roommessage-list', function (data) {
-                recieve(data);
+            socket.on('subscribe-roommessage-list', function (response) {
+                recieve(response.data);
             });
         }
         
