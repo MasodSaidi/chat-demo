@@ -92,12 +92,14 @@
             myMessagebar.textarea.focus();
         }
         
-        function recieve(message) {
-            if (!message) {
+        function recieve(data) {
+            if (!data) {
                 myMessages.clean();
                 return;                
             }
-                
+            
+            var message = data[data.length - 1];            
+            
             var avatar, 
                 name, 
                 messageType = 'sent';
