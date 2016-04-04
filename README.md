@@ -1,2 +1,2 @@
 # Chat demo
-Chat demo using WebRTC
+Chat demo using RethinkDB
