@@ -98,7 +98,10 @@
                 return;                
             }
             
-            var message = data[data.length - 1];            
+            var message = data[data.length - 1];
+            
+            if (!message)
+                return;
             
             var avatar, 
                 name, 
