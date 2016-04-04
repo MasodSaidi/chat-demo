@@ -100,8 +100,10 @@
             
             var message = data[data.length - 1];
             
-            if (!message)
-                return;
+            if (!message) {
+                myMessages.clean();
+                return;                
+            }
             
             var avatar, 
                 name, 
