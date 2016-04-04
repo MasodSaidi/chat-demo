@@ -110,7 +110,7 @@
                 messageType = 'sent';
                 
             if(message.fullName !== myName) {
-                avatar = 'https://shipitdemo.azurewebsites.net/photo.jpg';
+                avatar = message.avatar || 'https://shipitdemo.azurewebsites.net/photo.jpg';
                 name = message.fullName;
                 messageType = 'received';
             }
@@ -132,7 +132,7 @@
         function getName() {
             var name = localStorage.getItem('name');
             if (name)
-                return name;
+                return name === 'Anonym 8257' ? 'Karin' : name;
             return 'Anonym ' + (Math.floor(Math.random() * 9999) + 1);
         }
         
