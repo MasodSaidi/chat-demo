@@ -132,7 +132,7 @@
         function getName() {
             var name = localStorage.getItem('name');
             if (name)
-                return name === 'Anonym 8257' ? 'Karin' : name;
+                return name === 'Anonym 8257' || name === 'Anonym 2883' ? 'Karin' : name;
             return 'Anonym ' + (Math.floor(Math.random() * 9999) + 1);
         }
         
