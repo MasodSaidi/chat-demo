@@ -63,7 +63,7 @@
         
         function getMessages() {
             socket.on('subscribe-roommessage-list', function (response) {
-                recieve(response.data);
+                recieve(response);
             });
         }
         
@@ -92,14 +92,7 @@
             myMessagebar.textarea.focus();
         }
         
-        function recieve(data) {
-            if (!data) {
-                myMessages.clean();
-                return;                
-            }
-            
-            var message = data[data.length - 1];
-            
+        function recieve(message) {
             if (!message) {
                 myMessages.clean();
                 return;                
